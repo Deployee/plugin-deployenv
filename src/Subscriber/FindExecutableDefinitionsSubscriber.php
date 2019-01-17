@@ -47,7 +47,7 @@ class FindExecutableDefinitionsSubscriber implements EventSubscriberInterface
     {
         $collection = $event->getDefinitionFileCollection();
 
-        foreach($collection as $index => $class){
+        foreach($collection->getArrayCopy() as $index => $class){
             $tagValues = $this->docBlock->getTagsByName($class, 'env');
             if($this->docBlock->hasTag($class, 'env') && !in_array($this->env->getName(), $tagValues, false)){
                 $collection->offsetUnset($index);
